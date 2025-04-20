@@ -6,7 +6,7 @@ const ball = {
   backgroundColor: "#dd00ee",
   borderRadius: "10%",
 };
-
+console.log(headllo);
 function NoteCard({ data, deletenode }) {
   return (
     <div>
