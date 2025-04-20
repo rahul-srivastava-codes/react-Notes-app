@@ -1,50 +1,36 @@
-import React from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import * as motion from "motion/react-client";
 
-const button = {
-  backgroundColor: "#0cdcf7",
-  borderRadius: "10px",
-  padding: "10px 20px",
-  color: "#0f1115",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  outerWidth: "20vw",
-  innerWidth: "20vw",
+const ball = {
+  width: 70,
+  height: 25,
+  backgroundColor: "#dd00ee",
+  borderRadius: "10%",
 };
 
-function NoteCard({ data }) {
-  const [isVisible, setIsVisible] = useState(true);
+function NoteCard({ data, deletenode }) {
   return (
     <div>
-      <AnimatePresence initial={false}>
-        {isVisible ? (
+      {data.map((item, index) => (
+        <div className="flex items-center justify-between" key={index}>
+          <div>
+            <div>Title : {item.title}</div>
+            <div>Description : {item.content}</div>
+          </div>
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
+            transition={{
+              duration: 0.4,
+              scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+            }}
+            style={ball}
           >
-            {data.map((item) => (
-              <div>
-                <div>{item.title}</div>
-                <div>{item.content}</div>
-                <button className="bg-red-400 rounded-lg px-2 py-1">
-                  Delete
-                </button>
-              </div>
-            ))}
+            <button className="px-2" onClick={() => deletenode(item.id)}>
+              Delete
+            </button>
           </motion.div>
-        ) : null}
-      </AnimatePresence>
-      <motion.button
-        style={button}
-        onClick={() => setIsVisible(!isVisible)}
-        whileTap={{ y: 1 }}
-      >
-        {isVisible ? "Hide" : "Show "} notes
-      </motion.button>
+        </div>
+      ))}
     </div>
   );
 }
