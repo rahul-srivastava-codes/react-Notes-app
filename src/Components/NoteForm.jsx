@@ -41,10 +41,10 @@ function NoteForm() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row justify-evenly mt-5">
+    <div className="flex flex-col md:flex-row justify-between m-2">
       <form
         onSubmit={handleclick}
-        className="flex flex-col items-center px-4 py-4 border rounded-lg shadow-md w-full md:w-1/3 bg-white"
+        className="flex flex-col items-center px-4 py-4 border rounded-lg shadow-md w-full w-[40vw] bg-white"
       >
         <h3 className="text-3xl font-bold text-indigo-600 mb-4">Notes App</h3>
 
