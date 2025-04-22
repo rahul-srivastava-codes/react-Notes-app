@@ -1,34 +1,68 @@
 import * as motion from "motion/react-client";
 
-const ball = {
+const deletebut = {
   width: 70,
-  height: 25,
-  backgroundColor: "#dd00ee",
+  height: 30,
+  backgroundColor: "#e11d48", // Tailwind's rose-600 equivalent
   borderRadius: "10%",
+  marginBottom: "0.5rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "white",
 };
-console.log(headllo);
-function NoteCard({ data, deletenode }) {
+
+const editbut = {
+  width: 70,
+  height: 30,
+  backgroundColor: "#10b981", // Tailwind's emerald-500 equivalent
+  borderRadius: "10%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "white",
+};
+
+function NoteCard({ data, deletenode, editnode }) {
   return (
-    <div>
+    <div className="flex flex-col gap-4 p-4 w-full md:w-2/3 mx-auto">
       {data.map((item, index) => (
-        <div className="flex items-center justify-between" key={index}>
+        <div
+          key={index}
+          className="flex justify-between items-start p-4 border rounded shadow bg-white"
+        >
           <div>
-            <div>Title : {item.title}</div>
-            <div>Description : {item.content}</div>
+            <h2 className="font-semibold text-lg text-indigo-700">
+              Title: {item.title}
+            </h2>
+            <p className="text-gray-700 mt-1">Description: {item.content}</p>
           </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 0.4,
-              scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
-            }}
-            style={ball}
-          >
-            <button className="px-2" onClick={() => deletenode(item.id)}>
-              Delete
-            </button>
-          </motion.div>
+
+          <div className="flex flex-col gap-2 items-center ml-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.4,
+                scale: { type: "spring", bounce: 0.5 },
+              }}
+              style={deletebut}
+            >
+              <button onClick={() => deletenode(item.id)}>Delete</button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.4,
+                scale: { type: "spring", bounce: 0.5 },
+              }}
+              style={editbut}
+            >
+              <button onClick={() => editnode(item.id)}>Edit</button>
+            </motion.div>
+          </div>
         </div>
       ))}
     </div>

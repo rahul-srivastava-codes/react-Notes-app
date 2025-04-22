@@ -2,7 +2,7 @@ import NoteForm from "./Components/NoteForm";
 
 function App() {
   return (
-    <div className="h-[100vh] w-[100vw]  flex items-center justify-center flex-col ">
+    <div className="h-[100vh] w-[100vw] flex-col">
       <NoteForm></NoteForm>
     </div>
   );
