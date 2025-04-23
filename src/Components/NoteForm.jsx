@@ -1,7 +1,8 @@
 import { useState } from "react";
 import NoteCard from "./NoteCard";
+import * as motion from "motion/react-client";
 
-function NoteForm() {
+function NoteForm({ mode }) {
   const [data, setData] = useState([]);
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
@@ -39,14 +40,25 @@ function NoteForm() {
       setEditId(id);
     }
   }
-
+  const box = {
+    backgroundColor: "#9911ff",
+    borderRadius: 5,
+  };
   return (
     <div className="flex flex-col md:flex-row justify-between m-2">
       <form
         onSubmit={handleclick}
-        className="flex flex-col items-center px-4 py-4 border rounded-lg shadow-md w-full w-[40vw] bg-white"
+        className={`flex flex-col items-center px-4 py-4 border rounded-lg shadow-md w-[30vw] h-[40vh]  ${
+          mode ? "bg-zinc-800" : "bg-white"
+        }`}
       >
-        <h3 className="text-3xl font-bold text-indigo-600 mb-4">Notes App</h3>
+        <h3
+          className={`text-3xl font-bold ${
+            mode ? "text-white" : "text-indigo-600"
+          }  mb-4`}
+        >
+          Notes App
+        </h3>
 
         <input
           className="w-full px-3 py-2 mb-3 border rounded-lg"
@@ -64,10 +76,11 @@ function NoteForm() {
           onChange={(e) => setcontent(e.target.value)}
           required
         />
-
-        <button className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg">
-          {isEdit ? "Update Note" : "Add Note"}
-        </button>
+        <motion.div whileHover={{ scale: 1.1 }} style={box}>
+          <button className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg">
+            {isEdit ? "Update Note" : "Add Note"}
+          </button>
+        </motion.div>
       </form>
 
       <NoteCard data={data} deletenode={deletenode} editnode={editnode} />
